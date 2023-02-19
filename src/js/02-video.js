@@ -13,9 +13,6 @@ player.on(
 
 player
   .setCurrentTime(localStorage.getItem('videoplayer-current-time'))
-  //   .then(function (seconds) {
-  //     seconds = the actual time that the player seeked to  -------> Підкажіть будь-ласка, для чого цей метод
-  //   })
   .catch(function (error) {
     switch (error.name) {
       case 'RangeError':
@@ -24,3 +21,4 @@ player
         break;
     }
   });
+localStorage.removeItem('videoplayer-current-time');
