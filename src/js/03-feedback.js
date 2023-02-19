@@ -14,7 +14,6 @@ feedbackForm.addEventListener('submit', feedbackFormSubmitHandler);
 populateFormFields();
 
 function feedbackFormInputHandler(e) {
-  console.log(formData);
   formData[e.target.name] = e.target.value;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
