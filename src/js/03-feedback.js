@@ -37,7 +37,7 @@ function populateFormFields() {
     parsedFormData.message
       ? (messageInput.value = parsedFormData.message)
       : (messageInput.value = '');
-    formData.email = parsedFormData.email;
-    formData.message = parsedFormData.message;
+    formData.email = emailInput.value;
+    formData.message = messageInput.value;
   }
 }
