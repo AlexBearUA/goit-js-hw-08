@@ -31,12 +31,8 @@ function populateFormFields() {
   parsedFormData = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
   if (parsedFormData) {
-    parsedFormData.email
-      ? (emailInput.value = parsedFormData.email)
-      : (emailInput.value = '');
-    parsedFormData.message
-      ? (messageInput.value = parsedFormData.message)
-      : (messageInput.value = '');
+    emailInput.value = parsedFormData.email || '';
+    messageInput.value = parsedFormData.message || '';
     formData.email = emailInput.value;
     formData.message = messageInput.value;
   }
