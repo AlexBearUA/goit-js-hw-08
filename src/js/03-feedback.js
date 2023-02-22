@@ -1,17 +1,14 @@
 import throttle from 'lodash.throttle';
 
 const feedbackForm = document.querySelector('.feedback-form');
-const emailInput = document.querySelector('input[name="email"]');
-const messageInput = document.querySelector('textarea[name="message"]');
 const STORAGE_KEY = 'feedback-form-state';
 
-let formData = {};
-let parsedFormData = {};
+let formData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+
+populateFormInputs();
 
 feedbackForm.addEventListener('input', throttle(feedbackFormInputHandler, 500));
 feedbackForm.addEventListener('submit', feedbackFormSubmitHandler);
-
-populateFormFields();
 
 function feedbackFormInputHandler(e) {
   formData[e.target.name] = e.target.value;
@@ -19,21 +16,18 @@ function feedbackFormInputHandler(e) {
 }
 
 function feedbackFormSubmitHandler(e) {
+  if (feedbackForm.email.value === '' || feedbackForm.message.value === '') {
+    alert('Заповніть форму');
+    return;
+  }
   console.log(formData);
   e.preventDefault();
   e.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
   formData = {};
-  parsedFormData = {};
 }
 
-function populateFormFields() {
-  parsedFormData = JSON.parse(localStorage.getItem(STORAGE_KEY));
-
-  if (parsedFormData) {
-    emailInput.value = parsedFormData.email || '';
-    messageInput.value = parsedFormData.message || '';
-    formData.email = emailInput.value;
-    formData.message = messageInput.value;
-  }
+function populateFormInputs() {
+  feedbackForm.email.value = formData.email || '';
+  feedbackForm.message.value = formData.message || '';
 }
