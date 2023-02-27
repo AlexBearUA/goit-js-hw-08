@@ -7,10 +7,13 @@ let formData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
 populateFormInputs();
 
-feedbackForm.addEventListener('input', throttle(feedbackFormInputHandler, 500));
+feedbackForm.addEventListener(
+  'input',
+  throttle(feedbackFormInputsHandler, 500)
+);
 feedbackForm.addEventListener('submit', feedbackFormSubmitHandler);
 
-function feedbackFormInputHandler(e) {
+function feedbackFormInputsHandler(e) {
   formData[e.target.name] = e.target.value;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
